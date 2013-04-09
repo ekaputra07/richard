@@ -236,6 +236,7 @@ INSTALLED_APPS = (
     'tastypie',
     'eadred',
 
+    'richard',
     'richard.videos',
     'richard.sitenews',
     'richard.pages',

@@ -17,7 +17,6 @@
 from django.conf import settings
 
 from sitenews import models
-from template_helpers import *
 
 
 def base(request):
