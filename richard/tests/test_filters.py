@@ -1,5 +1,5 @@
 import unittest
-from richard.context_processors import duration
+from richard.template_helpers import duration
 
 
 class DurationFilterTest(unittest.TestCase):
