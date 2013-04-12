@@ -59,25 +59,6 @@ def get_id_from_url(url):
     return int(url.rstrip('/').split('/')[-1])
 
 
-def tastypie_reverse(api_name, resource_name, pk=None):
-    """Return Tastypie URL based on given resource detail.
-    If no pk specified, will return resource list url.
-    """
-    try:
-        url_name = 'api_dispatch_list'
-        kwargs = {
-            'api_name': api_name,
-            'resource_name': resource_name,
-            }
-        if pk:
-            url_name = 'api_dispatch_detail'
-            kwargs.update({'pk': pk})
-        return reverse(url_name, kwargs=kwargs)
-    except NoReverseMatch:
-        return None
-
-
-
 class EnhancedModelResource(ModelResource):
     def dispatch(self, request_type, request, **kwargs):
         """Wrap ModelResource.dispatch so that it emails errors.
@@ -361,8 +342,5 @@ class CategoryResource(EnhancedModelResource):
         else:
             video_set = video_set.live()
 
-        video_set_urls = []
-        for vid in video_set.values_list('id', flat=True):
-            url = tastypie_reverse('v1','video', vid)
-            if url: video_set_urls.append(url)
-        return video_set_urls
+        vid_resource = VideoResource()
+        return [vid_resource.get_resource_uri(vid) for vid in video_set]
