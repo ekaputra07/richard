@@ -18,7 +18,6 @@ import traceback
 
 from django.conf import settings
 from django.core.mail import mail_admins
-from django.core.urlresolvers import reverse, NoReverseMatch
 
 from tastypie import fields
 from tastypie import http
